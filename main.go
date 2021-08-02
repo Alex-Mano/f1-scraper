@@ -3,8 +3,10 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"time"
 
 	"github.com/PuerkitoBio/goquery"
+	"github.com/aiomonitors/godiscord"
 )
 
 
@@ -76,8 +78,21 @@ func ScrapeTable() Ranking {
 	return list
 }
 
-func main(){
-	for i , v := range ScrapeTable(){
-		fmt.Println(i, "--", v)
+func SendToWebHook(items Ranking, webhook string) {
+	for _, item := range items {
+		e := godiscord.NewEmbed("Ranking", "", "https://www.formula1.com/en/results.html/2021/drivers.html")
+		//e.SetThumbnail(item.Image)
+		e.AddField("Name", item.Name, true)
+		e.AddField("Car", item.Car, true)
+		e.AddField("Points", item.Points, true)
+		e.SetFooter("@Mano", "")
+		e.SetAuthor("Schedule", "https://www.formula1.com/en/racing/2021.html", "")
+		e.SendToWebhook(webhook)
+		time.Sleep(500 * time.Millisecond)
 	}
+}
+
+func main(){
+	lista := ScrapeTable()
+	SendToWebHook(lista, "https://discordapp.com/api/webhooks/870593448279965718/fqvDkZU-yG1WRBJ2Qju9qHXkYjAxuA_CHWxH-iKfZsY2pGQx2G2BZI8zENwNAcAPi3B7")
 }
