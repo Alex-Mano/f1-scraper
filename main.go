@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"log"
 	"net/http"
 	"os"
@@ -94,8 +95,9 @@ func SendToWebHook(items Ranking, webhook string) {
 	}
 }
 
-func program (http.ResponseWriter, *http.Request){
+func program (w http.ResponseWriter, q *http.Request){
 	lista := ScrapeTable()
+	io.WriteString(w,"this is serving rn")
 	SendToWebHook(lista, "https://discordapp.com/api/webhooks/870593448279965718/fqvDkZU-yG1WRBJ2Qju9qHXkYjAxuA_CHWxH-iKfZsY2pGQx2G2BZI8zENwNAcAPi3B7")
 }
 

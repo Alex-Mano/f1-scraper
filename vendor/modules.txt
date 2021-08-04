@@ -1,0 +1,11 @@
+# github.com/PuerkitoBio/goquery v1.7.1
+## explicit
+github.com/PuerkitoBio/goquery
+# github.com/aiomonitors/godiscord v0.0.0-20200422003858-41242d4e5847
+## explicit
+github.com/aiomonitors/godiscord
+# github.com/andybalholm/cascadia v1.2.0
+github.com/andybalholm/cascadia
+# golang.org/x/net v0.0.0-20210614182718-04defd469f4e
+golang.org/x/net/html
+golang.org/x/net/html/atom
