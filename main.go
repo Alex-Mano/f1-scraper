@@ -2,7 +2,9 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/PuerkitoBio/goquery"
@@ -92,7 +94,14 @@ func SendToWebHook(items Ranking, webhook string) {
 	}
 }
 
-func main(){
+func program (http.ResponseWriter, *http.Request){
 	lista := ScrapeTable()
 	SendToWebHook(lista, "https://discordapp.com/api/webhooks/870593448279965718/fqvDkZU-yG1WRBJ2Qju9qHXkYjAxuA_CHWxH-iKfZsY2pGQx2G2BZI8zENwNAcAPi3B7")
+}
+
+func main(){
+	http.HandleFunc("/", program)
+	port := os.Getenv("PORT")
+	log.Fatal(http.ListenAndServe(":" + port, nil))
+
 }
